@@ -9,45 +9,16 @@ body {
 h1 {
     text-align: left;
     font-size: 30px;
+    color: rgb(218, 218, 218);
 }
 
 .row {
     text-align: center;
-    color: rgb(218, 218, 218);
 }
 
-#explore-div {
-    background-color: rgb(113, 157, 98);
-    padding: 5px;
+
+
+#areagraph {
+    background-color: white;
     margin-top: 15px;
 }
-#explore-div h2{
-    font-size: 27px;
-}
-
-#categ-div {
-    margin-top: 30px;
-    background-color: rgb(196, 196, 196);
-    padding: 4px;
-    width: 150px;
-    height: 40px;
-}
-#categ-div a {
-    font-size: 22px;
-    color: rgb(0, 0, 0);
-}
-
-#section-div {
-    margin-top: 50%;
-    color: rgb(218, 218, 218);
-}
-#section-div h3 {
-    color: rgb(218, 218, 218);
-}
-
-#placeholder-div {
-    width: 400px;
-    height: 300px;
-    background-color: rgb(196, 196, 196);
-}
-
