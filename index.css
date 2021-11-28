@@ -1,15 +1,12 @@
 body {
     background-color: rgb(57, 112, 176);
-    margin-top: 10%;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-bottom: 10%;
+    margin: 10%;
 }
 
 h1 {
     text-align: left;
     font-size: 30px;
-    color: rgb(218, 218, 218);
+    color: rgb(255, 255, 255);
 }
 
 .row {
@@ -18,7 +15,7 @@ h1 {
 
 
 
-#areagraph {
-    background-color: white;
+#graphs-container {
+    background-color: rgb(255, 255, 255);
     margin-top: 15px;
 }
