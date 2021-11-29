@@ -77,7 +77,7 @@ var sal_person_plot = function(data) {
     .append("circle")
         .attr("cx", function (d) { return x(d.conscientiousness) } )
         .attr("cy", function (d) { return y(d.Salary) } )
-        .attr("r", 1.6)
+        .attr("r", 1)
         .attr("fill", d => colorScale(d.conscientiousness))
         
     d3.select("#selectButton").on("change", function(d){
