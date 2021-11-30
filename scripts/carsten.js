@@ -28,7 +28,7 @@ var sal_person_plot = function(data) {
 
     var colorScale = d3.scaleOrdinal()
                         .domain([-8,8])
-                        .range(d3.schemeSet1);
+                        .range(d3.schemeSet2);
 
     var x = d3.scaleLinear()
         .domain([-8,4])
@@ -78,7 +78,7 @@ var sal_person_plot = function(data) {
         .attr("cx", function (d) { return x(d.conscientiousness) } )
         .attr("cy", function (d) { return y(d.Salary) } )
         .attr("r", 3)
-        .attr("fill", d => colorScale(d.conscientiousness))
+        .attr("fill", d => colorScale(d.Specialization ))
         
     d3.select("#selectButton").on("change", function(d){
 
@@ -106,31 +106,26 @@ var sal_person_plot = function(data) {
 
     function openess(){
         dots.attr("cx", function (d) { return x(d.openess_to_experience)})
-        .attr("fill", d => colorScale(d.openess_to_experience))
         titleT.text = "Salary and Openess to Experience"
 
     }
     function conscientiousness(){
         dots.attr("cx", function (d) { return x(d.conscientiousness)})
-        .attr("fill", d => colorScale(d.conscientiousness))
         titleT.text = "Salary and Conscientiousness"
 
     }
     function agreeableness(){
         dots.attr("cx", function (d) { return x(d.agreeableness)})
-        .attr("fill", d => colorScale(d.agreeableness))
         titleT.text = "Salary and Agreeableness"
 
     }
     function nueroticism(){
         dots.attr("cx", function (d) { return x(d.nueroticism)})
-        .attr("fill", d => colorScale(d.nueroticism))
         titleT.text = "Salary and Nueroticism"
 
     }
     function extraversion(){
         dots.attr("cx", function (d) { return x(d.extraversion)})
-        .attr("fill", d => colorScale(d.extraversion))
         titleT.text = "Salary and Extraversion"
 
     }

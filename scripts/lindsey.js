@@ -46,7 +46,7 @@ var area_graph = function(data) {
 
     // // Add X axis
     var x = d3.scaleLinear()
-        .domain([50000, 200000])
+        .domain([50000, 500000])
         .range([ 0, width ]);
 
     var xAxis = svg.append("g")
