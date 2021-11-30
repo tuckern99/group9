@@ -28,7 +28,7 @@ var sal_person_plot = function(data) {
 
     var colorScale = d3.scaleOrdinal()
                         .domain([-8,8])
-                        .range(d3.schemeSet2);
+                        .range(d3.schemeSet1);
 
     var x = d3.scaleLinear()
         .domain([-8,4])
@@ -77,7 +77,7 @@ var sal_person_plot = function(data) {
     .append("circle")
         .attr("cx", function (d) { return x(d.conscientiousness) } )
         .attr("cy", function (d) { return y(d.Salary) } )
-        .attr("r", 1)
+        .attr("r", 3)
         .attr("fill", d => colorScale(d.conscientiousness))
         
     d3.select("#selectButton").on("change", function(d){
