@@ -63,12 +63,12 @@ var sal_person_plot = function(data) {
     // Y label
     svg.append('text')
     .attr('text-anchor', 'middle')
-    .attr('x', -height )
+    .attr('x', -height +100 )
     .attr('y', -60 )
     .attr('transform', 'rotate(-90)')
     
     .style('font-size', 12)
-    .text('Salary');
+    .text('Salary in Indian Rupees (1 INR = .013 USD) ');
 
     dots = svg.append('g')
     .selectAll("dot")
