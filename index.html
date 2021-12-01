@@ -17,10 +17,11 @@
 <body>
 
     
-    <script src="./scripts/script.js"></script>
-    <script src="./scripts/lindsey.js"></script>
-    <script src="./scripts/carsten.js"></script>
-    <script src="./scripts/tucker.js"></script>
+    
+    <script src="./scripts/lindsey.js" defer></script>
+    <script src="./scripts/carsten.js" defer></script>
+    <script src="./scripts/legend.js" defer></script>
+    <script src="./scripts/script.js" defer></script>
 
     
 
@@ -34,21 +35,27 @@
         </div>
 
         <div class="row" id="graphs-container">
-            <div class="col">
-                <svg id="areagraph" width=660 height=400></svg>
-            </div>
-            <div class="col">
-                <svg id="plot" width=600 height=400>
+            <div class="col-auto">
+                <svg id="plot" width=640 height=700>
                     <rect width="100%" height="100%" fill="white" />
                 </svg>
                 <br>
+                <!-- <select id="selectButton" width=400></select> -->
                 <select id="selectButton" width=400></select>
-            </div>            
-        </div>
-
-        <div class="row">
+            </div>
+            <div class="col-auto">
+                <svg id="areagraph" width=480 height=400></svg>
+                <br>
+                <svg id="legend" width=200 height=200></svg>
+            </div>
+            <!-- <div class="col-auto">
+                <svg id="legend" width=200 height=200></svg>
+            </div>      -->
+            
             
         </div>
+
+
 
 
 

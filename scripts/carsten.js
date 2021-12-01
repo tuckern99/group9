@@ -1,8 +1,8 @@
 var sal_person_plot = function(data) {
     // set the dimensions and margins of the graph
-    var margin = {top: 60, right: 230, bottom: 50, left: 70},
-        width = 600 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+    var margin = {top: 60, right: 100, bottom: 50, left: 70},
+        width = 700 - margin.left - margin.right,
+        height = 700 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var allGroup = ["Conscientiousness", "Agreeableness", "Extraversion", "Nueroticism", "Openess to Experience"]
@@ -27,7 +27,7 @@ var sal_person_plot = function(data) {
 
 
     var colorScale = d3.scaleOrdinal()
-                        .domain([-8,8])
+                        .domain([-6,8])
                         .range(d3.schemeSet2);
 
     var x = d3.scaleLinear()
