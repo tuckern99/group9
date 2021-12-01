@@ -3,8 +3,6 @@ var legend = function () {
     // List of groups = header of the csv files
     var keys = traits
 
-
-
     var svg = d3.select("#legend")
     .append("svg")
     .append("g")
