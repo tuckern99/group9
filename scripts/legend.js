@@ -80,8 +80,11 @@ var legend = function (data) {
             .on("mouseleave", function(d, i) {
                 noHighlight(d)
             }) 
-        
-    var specials = ['all', 'computer science', 'computer engineer', 'information technology', 'computer application']
+
+    var yAccessor = d => d.Specialization
+
+    var specials =  [... new Set(dataset.map(yAccessor))]
+    specials.unshift("all")
     var gender = ['all', 'male', 'female']
             
     // //////////////
@@ -158,22 +161,47 @@ var legend = function (data) {
         }
 
     d3.select("#gender_sel").on("change", function(d){
-        var selectedOption = d3.select(this).property("value")
-        // run the function with the selected option
-        console.log(selectedOption)
-        switch(selectedOption){
-            case "male":
-                d3.selectAll(".m").style("opacity", 1)
-                d3.selectAll(".f").style("opacity", 0)
-                break;
-            case "female":
-                d3.selectAll(".f").style("opacity", 1)
-                d3.selectAll(".m").style("opacity", 0)
-                break;
-            default:
-                d3.selectAll(".f").style("opacity", 1)
-                d3.selectAll(".m").style("opacity", 1)
-        }
+        changeDots()
     })
+
+    d3.select("#special_sel").on("change", function(d){
+        changeDots()
+    })
+
+    function changeDots(){
+        var gender = d3.select("#gender_sel").property("value")
+        var spec = d3.select("#special_sel").property("value").replace(/\s/g, '')
+
+        d3.selectAll(".f").style("opacity", 0)
+        d3.selectAll(".m").style("opacity", 0)
+        if( spec == "all"){
+            switch(gender){
+                case "male":
+                    d3.selectAll(".m").style("opacity", 1)
+                    break;
+                case "female":
+                    d3.selectAll(".f").style("opacity", 1)
+                    break;
+                default:
+                    d3.selectAll(".f").style("opacity", 1)
+                    d3.selectAll(".m").style("opacity", 1)
+            }
+        } else {
+            switch(gender){
+                case "male":
+                    d3.selectAll(".m."+spec).style("opacity", 1)
+                    break;
+                case "female":
+                    d3.selectAll(".f."+spec).style("opacity", 1)
+                    break;
+                default:
+                    d3.selectAll(".f."+spec).style("opacity", 1)
+                    d3.selectAll(".m."+spec).style("opacity", 1)
+            }
+        }
+       
+
+        
+    }
 
         }

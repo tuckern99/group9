@@ -73,7 +73,7 @@ var sal_person_plot = function(data) {
         .attr("cx", function (d) { return x(d.conscientiousness) } )
         .attr("cy", function (d) { return y(d.Salary) } )
         .attr("r", 5)
-        .attr("class", function(d) { return d.Gender + " "+ d.Specialization + " " + d.ID })
+        .attr("class", function(d) { return d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
         .attr("fill", d => colorScale(d.Specialization ))
         .on('mouseover', function(d, i){
             d3.select(this).attr("stroke-width", "1")
