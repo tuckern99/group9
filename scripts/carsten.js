@@ -73,6 +73,7 @@ var sal_person_plot = function(data) {
         .attr("cx", function (d) { return x(d.conscientiousness) } )
         .attr("cy", function (d) { return y(d.Salary) } )
         .attr("r", 5)
+        .attr("class", function(d) { return d.Gender + " "+ d.Specialization + " " + d.ID })
         .attr("fill", d => colorScale(d.Specialization ))
         .on('mouseover', function(d, i){
             d3.select(this).attr("stroke-width", "1")
@@ -108,7 +109,7 @@ var sal_person_plot = function(data) {
                 openess()
         }
     })
-
+    
     function openess(){
         dots.attr("cx", function (d) { return x(d.openess_to_experience)})
         titleT.text = "Salary and Openess to Experience"

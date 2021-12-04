@@ -28,7 +28,8 @@ var legend = function (data) {
     // // Carsten Plot //
     // //////////
     var hiddenText = d3.select(".hiddenText")
-
+   
+    
     // //////////
     // // LEGEND //
     // //////////
@@ -79,9 +80,30 @@ var legend = function (data) {
             .on("mouseleave", function(d, i) {
                 noHighlight(d)
             }) 
-
-    var drodown = d3.select("#selectButton") 
         
+    var specials = ['all', 'computer science', 'computer engineer', 'information technology', 'computer application']
+    var gender = ['all', 'male', 'female']
+            
+    // //////////////
+    // // CONTROLS //
+    // /////////////
+    var special_dropdown = d3.select("#special_sel")
+        .selectAll('myOptions') 
+        .data(specials)
+        .enter()
+        .append('option')
+        .text(function (d) { return d; }) 
+        .attr("value", function (d) { return d; }) 
+
+    var gender_select = d3.select("#gender_sel")
+        .selectAll('myOptions') 
+        .data(gender)
+        .enter()
+        .append('option')
+        .text(function (d) { return d; }) 
+        .attr("value", function (d) { return d; }) 
+
+
     function hoverOption(selectedOption){
         // run the function with the selected option
         console.log(selectedOption)
@@ -134,4 +156,24 @@ var legend = function (data) {
     
     
         }
+
+    d3.select("#gender_sel").on("change", function(d){
+        var selectedOption = d3.select(this).property("value")
+        // run the function with the selected option
+        console.log(selectedOption)
+        switch(selectedOption){
+            case "male":
+                d3.selectAll(".m").style("opacity", 1)
+                d3.selectAll(".f").style("opacity", 0)
+                break;
+            case "female":
+                d3.selectAll(".f").style("opacity", 1)
+                d3.selectAll(".m").style("opacity", 0)
+                break;
+            default:
+                d3.selectAll(".f").style("opacity", 1)
+                d3.selectAll(".m").style("opacity", 1)
+        }
+    })
+
         }
