@@ -1,4 +1,4 @@
-var legend = function () {
+var legend = function (data) {
 
     // List of groups = header of the csv files
     var keys = traits
@@ -12,7 +12,7 @@ var legend = function () {
     //////////
 
     // What to do when one group is hovered
-    var highlight = function(d){
+    function highlight(d){
         console.log(d)
         // reduce opacity of all groups
         d3.selectAll(".myArea").style("opacity", .15)
@@ -24,6 +24,10 @@ var legend = function () {
     var noHighlight = function(d){
         d3.selectAll(".myArea").style("opacity", 1)
     }
+    // //////////
+    // // Carsten Plot //
+    // //////////
+    var hiddenText = d3.select(".hiddenText")
 
     // //////////
     // // LEGEND //
@@ -44,8 +48,18 @@ var legend = function () {
             .attr("width", size)
             .attr("height", size)
             .style("fill", function(d){ return color(d)})
-            .on("mouseover", highlight)
-            .on("mouseleave", noHighlight)
+            .on("mouseover", function(d, i) {
+            
+                highlight(d)
+                hoverOption(i)
+            }) 
+            .on("mouseleave", function(d, i) {
+                noHighlight(d)
+            }) 
+            
+        var x = d3.scaleLinear()
+            .domain([-8,4])
+            .range([ 0, 530 ]);
 
     // Add one dot in the legend for each name.
     svg.selectAll("mylabels")
@@ -58,6 +72,66 @@ var legend = function () {
             .text(function(d){ return d})
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
-            .on("mouseover", highlight)
-            .on("mouseleave", noHighlight)
-}
+            .on("mouseover", function(d, i) {
+                highlight(d)
+                hoverOption(i)
+            }) 
+            .on("mouseleave", function(d, i) {
+                noHighlight(d)
+            }) 
+
+    var drodown = d3.select("#selectButton") 
+        
+    function hoverOption(selectedOption){
+        // run the function with the selected option
+        console.log(selectedOption)
+        switch(selectedOption){
+            case "conscientiousness":
+                conscientiousness()
+                break;
+            case "agreeableness":
+                agreeableness()
+                
+                break;
+            case "extraversion":
+                extraversion()
+                
+                break;
+            case "nueroticism":
+                
+                nueroticism()
+                break;
+            default:
+                openess()
+        }
+    }
+
+    function openess(){
+        dots.attr("cx", function (d) { return x(d.openess_to_experience)})
+        titleT.text = "Salary and Openess to Experience"
+
+    }
+    function conscientiousness(){
+        dots.attr("cx", function (d) { return x(d.conscientiousness)})
+        titleT.text = "Salary and Conscientiousness"
+
+    }
+    function agreeableness(){
+        dots.attr("cx", function (d) { return x(d.agreeableness)})
+        titleT.text = "Salary and Agreeableness"
+
+
+    }
+    function nueroticism(){
+        dots.attr("cx", function (d) { return x(d.nueroticism)})
+        titleT.text = "Salary and Nueroticism"
+        
+
+    }
+    function extraversion(){
+        dots.attr("cx", function (d) { return x(d.extraversion)})
+        titleT.text = "Salary and Extraversion"
+    
+    
+        }
+        }

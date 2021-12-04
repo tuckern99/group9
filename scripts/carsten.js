@@ -17,14 +17,9 @@ var sal_person_plot = function(data) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    var dropdownButton = d3.select("#selectButton")
-        .selectAll('myOptions') 
-        .data(allGroup)
-        .enter()
-        .append('option')
-        .text(function (d) { return d; }) 
-        .attr("value", function (d) { return d; }) 
 
+    var hiddenText = svg.append("text")
+    .attr("class","hiddenText")
 
     var colorScale = d3.scaleOrdinal()
                         .domain([-6,8])
@@ -91,13 +86,11 @@ var sal_person_plot = function(data) {
         
 
                     
-        
-    d3.select("#selectButton").on("change", function(d){
 
-        // recover the option that has been chosen
-        var selectedOption = d3.select(this).property("value")
-
+    hiddenText.on("change", function(d){
+        var selectedOption = hiddenText.value
         // run the function with the selected option
+        console.log(selectedOption.value)
         switch(selectedOption){
             case "Conscientiousness":
                 conscientiousness() 
