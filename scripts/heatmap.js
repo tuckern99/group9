@@ -32,12 +32,17 @@ var heatmap = function (data) {
     var xaxis = svg.append('g')
         .attr("transform", "translate(0," + (height-margins.bottom) + ")")
         .call(d3.axisBottom(xScale)).selectAll("text")
+        .each(function (d, i) {
+            label = d3.select(this).text();
+            label = label.replace('engineering', 'eng.')
+            label = label.replace('communication', 'comm.')
+            d3.select(this).text(label);
+        })
         .style("text-anchor", "end")
-        .style("font-size", "12px")
+        .style("font-size", "13px")
         .attr("dx", "-.8em")
         .attr("dy", ".15em")
         .attr("transform", "rotate(-65)");
-        
 
 
   // Build y scale and axis:
