@@ -1,8 +1,8 @@
-var traits = ['conscientiousness', 'agreeableness', 'extraversion', 'nueroticism', 'openess_to_experience']
+var traits = [ 'conscientiousness', 'agreeableness', 'extraversion', 'nueroticism', 'openess_to_experience']
 
-var area_graph = function(data) {
+var area_graph = function(o_data) {
 
-    data = setdata(data);
+    data = setdata(o_data);
 
     console.log(data)
     
@@ -98,7 +98,7 @@ var area_graph = function(data) {
     var area = d3.area()
         .x(function(d) { return x(d.data.Salary); })
         .y0(function(d) { return height; })
-        .y1(function(d) { return y(d[1]); })
+        .y1(function(d) { return y(d[1]);  })
 
     // Show the areas
     areaChart
@@ -108,17 +108,7 @@ var area_graph = function(data) {
         .append("path")
         .attr("class", function(d) { return "myArea " + d.key })
         .style("fill", function(d) { return color(d.key); })
-        .attr("d", area)
-        // .on('mouseover', function () {
-        //     d3.selectAll(".myArea") 
-        //         .attr("opacity", ".1");
-        //     d3.select(this)
-        //         .attr("opacity", "1");  
-        // })
-        // .on('mouseout', function(){
-        //     d3.selectAll(".myArea")
-        //         .attr("opacity", "1")
-        //   })               
+        .attr("d", area)              
 
     // Add the brushing
     areaChart
@@ -126,59 +116,17 @@ var area_graph = function(data) {
         .attr("class", "brush")
         // .call(brush);
 
-    // //////////
-    // // HIGHLIGHT GROUP //
-    // //////////
+    
 
-    // // What to do when one group is hovered
-    // var highlight = function(d){
-    //     console.log(d)
-    //     // reduce opacity of all groups
-    //     d3.selectAll(".myArea").style("opacity", .15)
-    //     // exceptt the one that is hovered
-    //     d3.select("."+d.path[0].__data__).style("opacity", 1)
-    // }
-
-    // // And when it is not hovered anymore
-    // var noHighlight = function(d){
-    //     d3.selectAll(".myArea").style("opacity", 1)
-    // }
-
-
-
-    // // //////////
-    // // // LEGEND //
-    // // //////////
-
-    // // Add one dot in the legend for each name.
-    // var size = 20
-    // svg.selectAll("myrect")
-    //     .data(keys)
-    //     .enter()
-    //     .append("rect")
-    //         .attr("x", 400)
-    //         .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
-    //         .attr("width", size)
-    //         .attr("height", size)
-    //         .style("fill", function(d){ return color(d)})
-    //         .on("mouseover", highlight)
-    //         .on("mouseleave", noHighlight)
-
-    // // Add one dot in the legend for each name.
-    // svg.selectAll("mylabels")
-    //     .data(keys)
-    //     .enter()
-    //     .append("text")
-    //         .attr("x", 400 + size*1.2)
-    //         .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
-    //         .style("fill", function(d){ return color(d)})
-    //         .text(function(d){ return d})
-    //         .attr("text-anchor", "left")
-    //         .style("alignment-baseline", "middle")
-    //         .on("mouseover", highlight)
-    //         .on("mouseleave", noHighlight)
+    // d3.select("#special_sel").on("change", function(d){
+    //     data = o_data.filter((d) => d.Specialization === special);
+    //     data = setdata(data);
+    //     console.log(data)
+    // })
    
 }
+
+
 
 function setdata(data) {
     new_data = [];
@@ -187,8 +135,6 @@ function setdata(data) {
 
     let lower = 25000
     let upper = lower + increment;
-
-    console.log(data[0].conscientiousness)
 
     for (let i = 0; i < num_increments; i++) {
         let consc = [];
@@ -224,6 +170,5 @@ function setdata(data) {
     }
 
     return new_data;
-    
 }
 

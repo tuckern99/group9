@@ -166,6 +166,14 @@ var legend = function (data) {
 
     d3.select("#special_sel").on("change", function(d){
         changeDots()
+        // d3.selectAll("#areagraph > *").remove()
+        // area_graph(
+        //     filter_data(
+        //         d3.select("#special_sel").property("value"),
+        //         d3.select("#gender_sel").property("value"),
+        //         data)
+        // )
+        
     })
 
     function changeDots(){
@@ -199,9 +207,14 @@ var legend = function (data) {
                     d3.selectAll(".m."+spec).style("opacity", 1)
             }
         }
-       
-
-        
     }
 
-        }
+    function filter_data(special='all', gender='all', data) {
+        console.log(special)
+        console.log(gender)
+        temp_data = data.filter((d) => d.Specialization === special);
+        console.log(temp_data)
+        return temp_data;
+    }
+
+}

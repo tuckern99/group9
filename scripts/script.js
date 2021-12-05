@@ -2,11 +2,13 @@
 
 var dataset;
 
-d3.csv("./Engineering_graduate_salary.csv").then(function(data) {
+d3.csv("./data.csv").then(function(data) {
     dataset = data;
 
+    temp_data = data;
+
     //enter graph gen functions here ...
-    area_graph(data);
+    area_graph(temp_data);
     sal_person_plot(data);
     legend(data);
 
