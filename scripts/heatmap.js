@@ -13,14 +13,14 @@ var heatmap = function (data) {
     .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')')
 
     items = [];
-    for (var i = -7; i <= 3.4; i +=0.1) {
+    for (var i = -7; i <= 3.4; i +=0.5) {
         items.push(Math.round(i*10)/10);
     }
     console.log(items)
     var yAccessor = d => d.Specialization
     var groups =  [... new Set(dataset.map(yAccessor))]
 
-    var conscientiousness = d => Math.round(d.conscientiousness*10)/10
+    var conscientiousness = d => rounding(d.conscientiousness)
     var vars =  [... new Set(dataset.map(conscientiousness))].sort(function(a,b) { return a - b; } )
     
     
@@ -57,9 +57,9 @@ var heatmap = function (data) {
 
   // build color scale
     
-    var colorScale = d3.scaleOrdinal()
-        .range(d3.schemeSet2)
-        .domain(groups)
+    var colorScale = d3.scaleSequential()
+    .interpolator(d3.interpolateInferno)
+    .domain([1,10])
 
   // add the squares
     heatmapRect = svg.selectAll()
@@ -67,7 +67,7 @@ var heatmap = function (data) {
         .enter()
         .append('rect')
             .attr('x', d => xScale(d.Specialization))
-            .attr('y', d => yScale( Math.round(d.conscientiousness*10)/10))
+            .attr('y', d => yScale(rounding(d.conscientiousness)))
             .attr('rx', 4)
             .attr('ry', 4)
             .attr('width', xScale.bandwidth())
@@ -77,26 +77,34 @@ var heatmap = function (data) {
             .style('stroke-width', 4)
             .attr("class", function(d) { return "heatmap " + d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
             .style('stroke-opacity', 0)
-            .style('fill-opacity', 0.2)
+            .style('fill-opacity', 0.02)
             .on('mouseover', darken_square)
             .on('mouseleave', function(d) {
                 lighten_square(d, this) // need to explicitly pass this
             })
-            heatmapRect.append("svg:title").text(function(d) { return ("Conscientiousness Score: " + Math.round(d.conscientiousness*10)/10 +"\nAgreeableness Score: " + Math.round(d.agreeableness*10)/10 +"\nExtraversion Score: " + Math.round(d.extraversion*10)/10 +
-                                    "\nNueroticism Score: " +  Math.round(d.nueroticism*10)/10 + "\nOpeness to Experience Score: " + Math.round(d.openess_to_experience*10)/10  + "\nSalary: ₹" + d.Salary+ "\nSpecialization: " + d.Specialization) })
+            heatmapRect.append("svg:title").text(function(d) { return ("Conscientiousness Score: " + rounding(d.conscientiousness) +"\nAgreeableness Score: " + rounding(d.agreeableness) +"\nExtraversion Score: " + rounding(d.extraversion) +
+                                    "\nNueroticism Score: " +  rounding(d.nueroticism) + "\nOpeness to Experience Score: " + rounding(d.openess_to_experience)) })
 
-  function darken_square(d) {
-    d3.select(this)
-      .style('fill-opacity', 1)
-      .style('stroke-opacity', 1)
+    function rounding(x){
+        z = Math.round(x*10)/10
+        x = Math.round(x) 
+        if (z - Math.round(x) > .7){
+            x = x+1
+        } else if(z - Math.round(x) > .2){
+            x = x+.5
+        } 
+        return x
+    }
+    function darken_square(d) {
+        d3.select(this)
+        .style('stroke-opacity', 1)
 
-  }
+    }
 
 
-  function lighten_square(d, ref) {
-    d3.select(ref)
-      .style('stroke-opacity', 0)
-      .style('fill-opacity', 0.7)
-  }
+    function lighten_square(d, ref) {
+        d3.select(ref)
+        .style('stroke-opacity', 0)
+    }
 
 }
