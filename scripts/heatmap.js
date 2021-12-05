@@ -1,8 +1,8 @@
 var heatmap = function (data) {
 
-    var margins = {top: 20, right: 25, bottom: 30, left: 40 },
-    width = 640 - margins.left - margins.right,
-    height = 900 - margins.top - margins.bottom;
+    var margins = {top: 10, right: 0, bottom: 240, left: 30},
+        width = 600 - margins.left - margins.right,
+        height = 1300 - margins.top - margins.bottom;
 
     var svg = d3
     .select('#heatmap')
@@ -12,27 +12,38 @@ var heatmap = function (data) {
     .attr('id', 'plot-area')
     .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')')
 
+    var items = [];
+    for (var i = -7; i <= 3.4; i +=0.1) {
+        items.push(Math.round(i*10)/10);
+    }
+    console.log(items)
     var yAccessor = d => d.Specialization
     var groups =  [... new Set(dataset.map(yAccessor))]
 
-    var xAccessor = d => Math.round(d.conscientiousness*10)/10
-    var vars =  [... new Set(dataset.map(xAccessor))].sort(function(a,b) { return a - b; } )
+    var conscientiousness = d => Math.round(d.conscientiousness*10)/10
+    var vars =  [... new Set(dataset.map(conscientiousness))].sort(function(a,b) { return a - b; } )
     
-    console.log(vars)
+    
     var xScale = d3.scaleBand()
         .domain(groups)
         .range([0, width])
         .padding(0.1)
 
     svg.append('g')
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xScale))
-        .select('.domain').remove()
+        .attr("transform", "translate(0," + (height-margins.bottom) + ")")
+        .call(d3.axisBottom(xScale)).selectAll("text")
+        .style("text-anchor", "end")
+        .style("font-size", "12px")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
+        
+
 
   // Build y scale and axis:
     var yScale = d3.scaleBand()
-        .domain(vars)
-        .range([height, 0])
+        .domain(items)
+        .range([height-margins.bottom, 0])
         .padding(0.1)
     
     svg.append('g')
@@ -60,6 +71,7 @@ var heatmap = function (data) {
             .style('fill', d => colorScale(d.conscientiousness))
             .style('stroke', 'black')
             .style('stroke-width', 4)
+            .attr("class", function(d) { return "heatmap " + d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
             .style('stroke-opacity', 0)
             .style('fill-opacity', 0.2)
             .on('mouseover', darken_square)

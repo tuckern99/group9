@@ -1,6 +1,6 @@
 var sal_person_plot = function(data) {
     // set the dimensions and margins of the graph
-    var margin = {top: 60, right: 100, bottom: 50, left: 70},
+    var margin = {top: 60, right: 50, bottom: 50, left: 70},
         width = 700 - margin.left - margin.right,
         height = 900 - margin.top - margin.bottom;
 
@@ -16,8 +16,7 @@ var sal_person_plot = function(data) {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
     .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
 
     var hiddenText = svg.append("text")
