@@ -12,6 +12,7 @@ d3.csv("./data.csv").then(function(data) {
     boxplot(temp_data);
     sal_person_plot(data);
     legend(data);
+    heatmap(data);
 
 }); 
 

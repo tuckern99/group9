@@ -23,7 +23,9 @@
     <script src="./scripts/carsten.js" defer></script>
     <script src="./scripts/boxplot.js" defer></script>
     <script src="./scripts/legend.js" defer></script>
+    <script src="./scripts/heatmap.js" defer></script>
     <script src="./scripts/script.js" defer></script>
+    
 
     
 
@@ -54,7 +56,14 @@
                 <span>gender</span>
                 <select id="gender_sel" width=400></select>
             </div>
-
+            <div class="col-auto">
+                <svg id="heatmap" width=700 height=900>
+                    <rect width="100%" height="100%" fill="white" />
+                </svg>
+            </div>
+            <!-- <div class="col-auto">
+                <svg id="legend" width=200 height=200></svg>
+            </div>      -->
             
             
         </div>
