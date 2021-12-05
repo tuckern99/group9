@@ -11,7 +11,9 @@ d3.csv("./data.csv").then(function(data) {
     // area_graph(temp_data);
     boxplot(temp_data);
     sal_person_plot(data);
+    heatmap(data);
     legend(data);
+
 
 }); 
 
