@@ -35,7 +35,7 @@ var sal_person_plot = function(data) {
         .call(d3.axisBottom(x));
 
     var y = d3.scaleLinear()
-        .domain([0, 1400000])
+        .domain([0, 1000000])
         .range([ height, 0]);
 
     svg.append("g")
