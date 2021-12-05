@@ -15,13 +15,14 @@ var legend = function (data) {
     //////////
 
     // What to do when one group is hovered
-    function highlight(d){
-        console.log(d)
-        // reduce opacity of all groups
-        d3.selectAll(".myArea").style("opacity", .15)
-        // exceptt the one that is hovered
-        d3.select("."+d.path[0].__data__).style("opacity", 1)
-    }
+    // function highlight(d){
+    //     .on('mouseover', function(d, i){
+    //         d3.select(this).style('stroke-width', 2)
+    //     })
+    //     .on("mouseout", function(d, i) {
+    //         d3.select(this).style('stroke-width', 0)
+    //     }) 
+    // }
 
     // And when it is not hovered anymore
     var noHighlight = function(d){
@@ -52,6 +53,41 @@ var legend = function (data) {
             .attr("width", size)
             .attr("height", size)
             .style("fill", function(d){ return color(d)})
+            .on('mouseover', function(d, i){
+                d3.select(this).style('stroke-width', 2)
+                d3.select(this).style('stroke','black')
+                
+                i = i.replace(/\s/g, '')
+                console.log(i)
+
+                d3.selectAll(".f."+i).style('stroke-width', 1)
+                d3.selectAll(".f."+i).style('stroke', 'black')
+                d3.selectAll(".m."+i).style('stroke-width', 1)
+                d3.selectAll(".m."+i).style('stroke', 'black')
+
+                d3.selectAll(".f."+i).style('opacity', 1)
+                d3.selectAll(".m."+i).style('opacity', 1)
+            })
+            .on("mouseout", function(d, i) {
+                spec = d3.select("#special_sel").property("value").replace(/\s/g, '')
+                gender = d3.select("#gender_sel").property("value")
+                console.log(gender)
+
+                d3.select(this).style('stroke-width', 0)
+
+                i = i.replace(/\s/g, '')
+                d3.selectAll(".f."+i).style('stroke-width', 0)
+                d3.selectAll(".m."+i).style('stroke-width', 0)
+
+                if (i != spec && spec != "all") {
+                    d3.selectAll(".f."+i).style('opacity', 0)
+                    d3.selectAll(".m."+i).style('opacity', 0)
+                }
+                if (gender != "all") {
+                    temp_class = gender == "female" ? ".m." : ".f."
+                    d3.selectAll(temp_class+i).style('opacity', 0)
+                }
+            }) 
             
         var x = d3.scaleLinear()
             .domain([-8,4])
@@ -245,13 +281,6 @@ var legend = function (data) {
         }
     }
 
-    function filter_data(special='all', gender='all', data) {
-        console.log(special)
-        console.log(gender)
-        temp_data = data.filter((d) => d.Specialization === special);
-        console.log(temp_data)
-        return temp_data;
-    }
 
 
 }
