@@ -8,7 +8,9 @@ var sal_person_plot = function(data) {
     var allGroup = ["Conscientiousness", "Agreeableness", "Extraversion", "Nueroticism", "Openess to Experience"]
 
 
+    var yAccessor = d => d.Specialization
 
+    var specials =  [... new Set(dataset.map(yAccessor))]
     var svg = d3.select("#plot")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -22,7 +24,7 @@ var sal_person_plot = function(data) {
     .attr("class","hiddenText")
 
     var colorScale = d3.scaleOrdinal()
-                        .domain([-6,8])
+                        .domain(specials)
                         .range(d3.schemeSet2);
 
     var x = d3.scaleLinear()
@@ -34,7 +36,7 @@ var sal_person_plot = function(data) {
         .call(d3.axisBottom(x));
 
     var y = d3.scaleLinear()
-        .domain([0, 2000000])
+        .domain([0, 1400000])
         .range([ height, 0]);
 
     svg.append("g")
@@ -76,10 +78,12 @@ var sal_person_plot = function(data) {
         .attr("class", function(d) { return d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
         .attr("fill", d => colorScale(d.Specialization ))
         .on('mouseover', function(d, i){
-            d3.select(this).attr("stroke-width", "1")
+            d3.select(this).attr("stroke-width", "10")
+            d3.select(this).attr("fill", "#000000")
         })
         .on("mouseout", function(d, i) {
             d3.select(this).attr("stroke-width", "0")
+            .attr("fill", d => colorScale(d.Specialization ))
         }) 
         dots.append("svg:title")
         .text(function(d) { return ("Conscientiousness Score: " + d.conscientiousness +"\nAgreeableness Score: " + d.agreeableness +"\nExtraversion Score: " + d.extraversion +
