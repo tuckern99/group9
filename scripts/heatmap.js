@@ -12,7 +12,7 @@ var heatmap = function (data) {
     .attr('id', 'plot-area')
     .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')')
 
-    var items = [];
+    items = [];
     for (var i = -7; i <= 3.4; i +=0.1) {
         items.push(Math.round(i*10)/10);
     }
@@ -26,18 +26,23 @@ var heatmap = function (data) {
     
     var xScale = d3.scaleBand()
         .domain(groups)
-        .range([0, width])
+        .range([0, width-margins.left])
         .padding(0.1)
 
-    svg.append('g')
+    var xaxis = svg.append('g')
         .attr("transform", "translate(0," + (height-margins.bottom) + ")")
         .call(d3.axisBottom(xScale)).selectAll("text")
+        .each(function (d, i) {
+            label = d3.select(this).text();
+            label = label.replace('engineering', 'eng.')
+            label = label.replace('communication', 'comm.')
+            d3.select(this).text(label);
+        })
         .style("text-anchor", "end")
-        .style("font-size", "12px")
+        .style("font-size", "13px")
         .attr("dx", "-.8em")
         .attr("dy", ".15em")
         .attr("transform", "rotate(-65)");
-        
 
 
   // Build y scale and axis:
@@ -46,19 +51,18 @@ var heatmap = function (data) {
         .range([height-margins.bottom, 0])
         .padding(0.1)
     
-    svg.append('g')
+    var yaxis = svg.append('g')
         .call(d3.axisLeft(yScale))
         .select('.domain').remove()
 
   // build color scale
     
-    var colorScale = d3
-        .scaleSequential()
-        .interpolator(d3.interpolateInferno)
-        .domain([-8, 4])
+    var colorScale = d3.scaleOrdinal()
+        .range(d3.schemeSet2)
+        .domain(groups)
 
   // add the squares
-    svg.selectAll()
+    heatmapRect = svg.selectAll()
         .data(data)
         .enter()
         .append('rect')
@@ -68,7 +72,7 @@ var heatmap = function (data) {
             .attr('ry', 4)
             .attr('width', xScale.bandwidth())
             .attr('height', yScale.bandwidth())
-            .style('fill', d => colorScale(d.conscientiousness))
+            .style('fill', d => colorScale(d.Specialization))
             .style('stroke', 'black')
             .style('stroke-width', 4)
             .attr("class", function(d) { return "heatmap " + d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
