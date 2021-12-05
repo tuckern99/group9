@@ -170,33 +170,33 @@ var legend = function (data) {
 
     function openess(){
         dots.attr("cx", function (d) { return x(d.openess_to_experience)})
-        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.openess_to_experience*10)/10)})
+        heatmapRect.attr('y', function (d) { return yScale(rounding(d.openess_to_experience))})
         titleT.text = "Salary and Openess to Experience"
 
     }
     function conscientiousness(){
         dots.attr("cx", function (d) { return x(d.conscientiousness)})
-        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.conscientiousness*10)/10)})
+        heatmapRect.attr('y', function (d) { return yScale(rounding(d.conscientiousness))})
         titleT.text = "Salary and Conscientiousness"
 
     }
     function agreeableness(){
         dots.attr("cx", function (d) { return x(d.agreeableness)})
-        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.agreeableness*10)/10)})
+        heatmapRect.attr('y', function (d) { return yScale(rounding(d.agreeableness))})
         titleT.text = "Salary and Agreeableness"
 
 
     }
     function nueroticism(){
         dots.attr("cx", function (d) { return x(d.nueroticism)})
-        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.nueroticism*10)/10)})
+        heatmapRect.attr('y', function (d) { return yScale(rounding(d.nueroticism))})
         titleT.text = "Salary and Nueroticism"
         
 
     }
     function extraversion(){
         dots.attr("cx", function (d) { return x(d.extraversion)})
-        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.extraversion*10)/10)})
+        heatmapRect.attr('y', function (d) { return yScale(rounding(d.extraversion))})
         titleT.text = "Salary and Extraversion"
     
     
@@ -282,5 +282,14 @@ var legend = function (data) {
     }
 
 
-
+    function rounding(x){
+        z = Math.round(x*10)/10
+        x = Math.round(x) 
+        if (z - Math.round(x) > .7){
+            x = x+1
+        } else if(z - Math.round(x) > .2){
+            x = x+.5
+        } 
+        return x
+    }
 }
