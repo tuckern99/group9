@@ -1,7 +1,13 @@
 var legend = function (data) {
 
+    var specials = [
+        "information technology", "computer engineering", "computer application",
+        "mechanical engineering", "electronics and communication engineering",
+        "electronics and electrical engineering", "civil engineering", "electrical engineering"]
+
     // List of groups = header of the csv files
-    var keys = traits
+    var keys = specials
+    console.log(keys)
 
     var svg = d3.select("#legend")
     .append("svg")
@@ -49,14 +55,6 @@ var legend = function (data) {
             .attr("width", size)
             .attr("height", size)
             .style("fill", function(d){ return color(d)})
-            .on("mouseover", function(d, i) {
-            
-                highlight(d)
-                hoverOption(i)
-            }) 
-            .on("mouseleave", function(d, i) {
-                noHighlight(d)
-            }) 
             
         var x = d3.scaleLinear()
             .domain([-8,4])
@@ -74,13 +72,6 @@ var legend = function (data) {
             .text(function(d){ return d})
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
-            .on("mouseover", function(d, i) {
-                highlight(d)
-                hoverOption(i)
-            }) 
-            .on("mouseleave", function(d, i) {
-                noHighlight(d)
-            }) 
 
     var yAccessor = d => d.Specialization
 
@@ -102,6 +93,14 @@ var legend = function (data) {
     var gender_select = d3.select("#gender_sel")
         .selectAll('myOptions') 
         .data(gender)
+        .enter()
+        .append('option')
+        .text(function (d) { return d; }) 
+        .attr("value", function (d) { return d; })
+        
+    var trait_select = d3.select("#trait_sel")
+        .selectAll('myOptions') 
+        .data(traits)
         .enter()
         .append('option')
         .text(function (d) { return d; }) 
@@ -177,6 +176,30 @@ var legend = function (data) {
     d3.select("#special_sel").on("change", function(d){
         changeDots()
         
+    })
+
+    d3.select("#trait_sel").on("change", function() {
+        trait = d3.select("#trait_sel").property("value")
+        console.log(trait)
+        switch(trait){
+            case "conscientiousness":
+                conscientiousness()
+                break;
+            case "agreeableness":
+                agreeableness()
+                
+                break;
+            case "extraversion":
+                extraversion()
+                
+                break;
+            case "nueroticism":
+                
+                nueroticism()
+                break;
+            default:
+                openess()
+        }
     })
 
     var colorScale = d3.scaleOrdinal()

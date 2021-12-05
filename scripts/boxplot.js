@@ -1,4 +1,5 @@
 var traits = [ 'conscientiousness', 'agreeableness', 'extraversion', 'nueroticism', 'openess_to_experience']
+
 var specials = [
     "information technology", "computer engineering", "computer application",
     "mechanical engineering", "electronics and communication engineering",
