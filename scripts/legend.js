@@ -1,11 +1,8 @@
 var legend = function (data) {
 
-    var specials = [
-        "information technology", "computer engineering", "computer application",
-        "mechanical engineering", "electronics and communication engineering",
-        "electronics and electrical engineering", "civil engineering", "electrical engineering"]
+    var yAccessor = d => d.Specialization
 
-    // List of groups = header of the csv files
+    var specials =  [... new Set(dataset.map(yAccessor))]
     var keys = specials
     console.log(keys)
 

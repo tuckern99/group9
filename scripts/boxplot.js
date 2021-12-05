@@ -1,12 +1,11 @@
 var traits = [ 'conscientiousness', 'agreeableness', 'extraversion', 'nueroticism', 'openess_to_experience']
 
-var specials = [
-    "information technology", "computer engineering", "computer application",
-    "mechanical engineering", "electronics and communication engineering",
-    "electronics and electrical engineering", "civil engineering", "electrical engineering"]
 
 var boxplot = function(data) {
 
+  var yAccessor = d => d.Specialization
+
+  var specials =  [... new Set(dataset.map(yAccessor))]
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 200, left: 50},
     width = 600 - margin.left - margin.right,

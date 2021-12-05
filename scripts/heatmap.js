@@ -84,18 +84,11 @@ var heatmap = function (data) {
             })
             .on('click', change_border_color)
 
-  // three functions that change the tooltip when user hovers / moves in / leaves a cell
-  // because we use the function key word to declare them, we can put them down
-  // here and they will be hoisted.
-
   function darken_square(d) {
     d3.select(this)
       .style('fill-opacity', 1)
       .style('stroke-opacity', 1)
-      // shrink a bit to make room for stroke, now visible
-      .attr('x', d => xScale(d.Specialization) + 2)
-      .attr('width', xScale.bandwidth() - 4)
-      .attr('height', yScale.bandwidth() - 4)
+
   }
 
 
