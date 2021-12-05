@@ -82,7 +82,8 @@ var heatmap = function (data) {
             .on('mouseleave', function(d) {
                 lighten_square(d, this) // need to explicitly pass this
             })
-            .on('click', change_border_color)
+            heatmapRect.append("svg:title").text(function(d) { return ("Conscientiousness Score: " + Math.round(d.conscientiousness*10)/10 +"\nAgreeableness Score: " + Math.round(d.agreeableness*10)/10 +"\nExtraversion Score: " + Math.round(d.extraversion*10)/10 +
+                                    "\nNueroticism Score: " +  Math.round(d.nueroticism*10)/10 + "\nOpeness to Experience Score: " + Math.round(d.openess_to_experience*10)/10  + "\nSalary: ₹" + d.Salary+ "\nSpecialization: " + d.Specialization) })
 
   function darken_square(d) {
     d3.select(this)
@@ -98,9 +99,4 @@ var heatmap = function (data) {
       .style('fill-opacity', 0.7)
   }
 
-  function change_border_color(d) {
-    let target = d3.select(this)
-    let color = target.style('stroke') // read the current stroke value
-    target.style('stroke', color == 'red' ? 'blue' : 'red')
-  }
 }

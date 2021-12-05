@@ -7,7 +7,7 @@ var boxplot = function(data) {
 
   var specials =  [... new Set(dataset.map(yAccessor))]
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 200, left: 50},
+var margin = {top: 10, right: 30, bottom: 200, left: 10},
     width = 600 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
