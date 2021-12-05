@@ -199,8 +199,11 @@ var legend = function (data) {
         }
     })
 
+    var yAccessor = d => d.Specialization
+
+    var spec =  [... new Set(dataset.map(yAccessor))]
     var colorScale = d3.scaleOrdinal()
-                        .domain(specials)
+                        .domain(spec)
                         .range(d3.schemeSet2);
 
     function changeDots(){
