@@ -159,7 +159,7 @@ var legend = function (data) {
     
     
         }
-
+        
     d3.select("#gender_sel").on("change", function(d){
         changeDots()
     })
@@ -176,6 +176,10 @@ var legend = function (data) {
         
     })
 
+    var colorScale = d3.scaleOrdinal()
+                        .domain(specials)
+                        .range(d3.schemeSet2);
+
     function changeDots(){
         var gender = d3.select("#gender_sel").property("value")
         var spec = d3.select("#special_sel").property("value").replace(/\s/g, '')
@@ -186,13 +190,17 @@ var legend = function (data) {
             switch(gender){
                 case "male":
                     d3.selectAll(".m").style("opacity", 1)
+                    .attr("fill", d => colorScale(d.Specialization ))
                     break;
                 case "female":
                     d3.selectAll(".f").style("opacity", 1)
+                    .attr("fill", d => colorScale(d.Specialization ))
                     break;
                 default:
                     d3.selectAll(".f").style("opacity", 1)
+                    .attr("fill", d => colorScale(d.Specialization ))
                     d3.selectAll(".m").style("opacity", 1)
+                    .attr("fill", d => colorScale(d.Specialization ))
             }
         } else {
             switch(gender){
@@ -204,7 +212,9 @@ var legend = function (data) {
                     break;
                 default:
                     d3.selectAll(".f."+spec).style("opacity", 1)
+                    .attr("fill", "pink")
                     d3.selectAll(".m."+spec).style("opacity", 1)
+                    .attr("fill", "#89CFF0")
             }
         }
     }
