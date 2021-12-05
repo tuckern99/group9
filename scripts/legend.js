@@ -62,6 +62,7 @@ var legend = function (data) {
             .domain([-8,4])
             .range([ 0, 530 ]);
 
+
     // Add one dot in the legend for each name.
     svg.selectAll("mylabels")
         .data(keys)
@@ -105,7 +106,11 @@ var legend = function (data) {
         .append('option')
         .text(function (d) { return d; }) 
         .attr("value", function (d) { return d; }) 
-
+    
+    var yScale = d3.scaleBand()
+        .domain(items)
+        .range([810, 0])
+        .padding(0.1)
 
     function hoverOption(selectedOption){
         // run the function with the selected option
@@ -133,28 +138,33 @@ var legend = function (data) {
 
     function openess(){
         dots.attr("cx", function (d) { return x(d.openess_to_experience)})
+        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.openess_to_experience*10)/10)})
         titleT.text = "Salary and Openess to Experience"
 
     }
     function conscientiousness(){
         dots.attr("cx", function (d) { return x(d.conscientiousness)})
+        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.conscientiousness*10)/10)})
         titleT.text = "Salary and Conscientiousness"
 
     }
     function agreeableness(){
         dots.attr("cx", function (d) { return x(d.agreeableness)})
+        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.agreeableness*10)/10)})
         titleT.text = "Salary and Agreeableness"
 
 
     }
     function nueroticism(){
         dots.attr("cx", function (d) { return x(d.nueroticism)})
+        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.nueroticism*10)/10)})
         titleT.text = "Salary and Nueroticism"
         
 
     }
     function extraversion(){
         dots.attr("cx", function (d) { return x(d.extraversion)})
+        heatmapRect.attr('y', function (d) { return yScale(Math.round(d.extraversion*10)/10)})
         titleT.text = "Salary and Extraversion"
     
     
