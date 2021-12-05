@@ -166,13 +166,6 @@ var legend = function (data) {
 
     d3.select("#special_sel").on("change", function(d){
         changeDots()
-        // d3.selectAll("#areagraph > *").remove()
-        // area_graph(
-        //     filter_data(
-        //         d3.select("#special_sel").property("value"),
-        //         d3.select("#gender_sel").property("value"),
-        //         data)
-        // )
         
     })
 
@@ -216,5 +209,6 @@ var legend = function (data) {
         console.log(temp_data)
         return temp_data;
     }
+
 
 }

@@ -10,6 +10,7 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
      
 
     <title>Group 9</title>
@@ -18,8 +19,9 @@
 
     
     
-    <script src="./scripts/lindsey.js" defer></script>
+    <!-- <script src="./scripts/lindsey.js" defer></script> -->
     <script src="./scripts/carsten.js" defer></script>
+    <script src="./scripts/boxplot.js" defer></script>
     <script src="./scripts/legend.js" defer></script>
     <script src="./scripts/script.js" defer></script>
 
@@ -42,7 +44,7 @@
                 <br>
             </div>
             <div class="col-auto">
-                <svg id="areagraph" width=480 height=400></svg>
+                <svg id="boxplot" width=700 height=500></svg>
                 <br>
                 <svg id="legend" width=200 height=150></svg>
                 <br>
@@ -52,9 +54,7 @@
                 <span>gender</span>
                 <select id="gender_sel" width=400></select>
             </div>
-            <!-- <div class="col-auto">
-                <svg id="legend" width=200 height=200></svg>
-            </div>      -->
+
             
             
         </div>

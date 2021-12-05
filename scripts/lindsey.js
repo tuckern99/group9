@@ -118,11 +118,28 @@ var area_graph = function(o_data) {
 
     
 
-    // d3.select("#special_sel").on("change", function(d){
-    //     data = o_data.filter((d) => d.Specialization === special);
-    //     data = setdata(data);
-    //     console.log(data)
-    // })
+    d3.select("#special_sel").on("change", function(){
+        special = d3.select("#special_sel").property("value")
+
+        data = o_data.filter((d) => d.Specialization === special);
+        data = setdata(data);
+        console.log(special)
+        console.log(data)
+
+        stackedData = d3.stack()
+            .keys(keys)
+            (data)
+
+        var area = d3.area()
+            .x(function(d) { return x(d.data.Salary); })
+            .y0(function(d) { return height; })
+            .y1(function(d) { return y(d[1]);  })
+
+        areaChart
+            .transition()
+            .attr("d", area) 
+            
+    })
    
 }
 
@@ -133,7 +150,9 @@ function setdata(data) {
     increment = 25000;
     num_increments = 19;
 
-    let lower = 25000
+    let ceiling = d3.max( data.map(function(d){return d.Salary}), s => +s)
+    let lower = d3.min( data.map(function(d){return d.Salary}), s => +s) 
+    
     let upper = lower + increment;
 
     for (let i = 0; i < num_increments; i++) {
