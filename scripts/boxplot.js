@@ -31,7 +31,6 @@ var svg = d3.select("#boxplot")
       min = Math.abs(q1 - 1.5 * interQuantileRange)
     //   max = q3 + 1.5 * interQuantileRange
     //   min = d3.min(d.map( function(g) {return g.Salary} ))
-      console.log(min)
       max = q3 + 1.5 * interQuantileRange
       return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max})
     })
@@ -47,11 +46,19 @@ var svg = d3.select("#boxplot")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x))
     .selectAll("text")
+        .each(function (d, i) {
+            label = d3.select(this).text();
+            label = label.replace('engineering', 'eng.')
+            label = label.replace('communication', 'comm.')
+            d3.select(this).text(label);
+        })
         .style("text-anchor", "end")
-        .style("font-size", "12px")
+        .style("font-size", "13px")
         .attr("dx", "-.8em")
         .attr("dy", ".15em")
         .attr("transform", "rotate(-65)");
+        
+
         
 
   // Show the Y scale
@@ -68,7 +75,7 @@ var svg = d3.select("#boxplot")
     .append("line")
       .attr("x1", function(d){return(x(d.key))})
       .attr("x2", function(d){return(x(d.key))})
-      .attr("y1", function(d){console.log(d.value.min);return(y(d.value.min))})
+      .attr("y1", function(d){return(y(d.value.min))})
       .attr("y2", function(d){return(y(d.value.max))})
       .attr("stroke", "black")
       .style("width", 40)
@@ -80,7 +87,7 @@ var svg = d3.select("#boxplot")
     .data(sumstat)
     .enter()
     .append("rect")
-        .attr("x", function(d){console.log(d.key);return(x(d.key)-boxWidth/2)})
+        .attr("x", function(d){return(x(d.key)-boxWidth/2)})
         .attr("y", function(d){return(y(d.value.q3))})
         .attr("height", function(d){return(y(d.value.q1)-y(d.value.q3))})
         .attr("width", boxWidth )
