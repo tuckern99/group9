@@ -20,6 +20,10 @@ var svg = d3.select("#boxplot")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+var color = d3.scaleOrdinal()
+.domain(specials)
+.range(d3.schemeSet2);
+
   // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
     .key(function(d) {return d.Specialization;})
@@ -59,8 +63,6 @@ var svg = d3.select("#boxplot")
         .attr("transform", "rotate(-65)");
         
 
-        
-
   // Show the Y scale
   var y = d3.scaleLinear()
     .domain([0, 900000 ])
@@ -92,7 +94,7 @@ var svg = d3.select("#boxplot")
         .attr("height", function(d){return(y(d.value.q1)-y(d.value.q3))})
         .attr("width", boxWidth )
         .attr("stroke", "black")
-        .style("fill", "#69b3a2")
+        .style("fill",function(d) { return color(d.key); })
 
   // Show the median
   svg
