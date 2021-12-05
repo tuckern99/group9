@@ -7,9 +7,9 @@ var boxplot = function(data) {
 
   var specials =  [... new Set(dataset.map(yAccessor))]
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 200, left: 50},
-    width = 600 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin = {top: 10, right: 30, bottom: 180, left: 50},
+    width = 500 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#boxplot")
