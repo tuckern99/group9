@@ -1,3 +1,5 @@
+var traits = [ 'conscientiousness', 'agreeableness', 'extraversion', 'nueroticism', 'openess_to_experience']
+
 var legend = function (data) {
 
     var yAccessor = d => d.Specialization
@@ -10,10 +12,7 @@ var legend = function (data) {
     .append("svg")
     .append("g")
 
-    // And when it is not hovered anymore
-    var noHighlight = function(d){
-        d3.selectAll(".myArea").style("opacity", 1)
-    }
+
     // //////////
     // // Carsten Plot //
     // //////////
@@ -143,29 +142,29 @@ var legend = function (data) {
         .range([810, 0])
         .padding(0.1)
 
-    function hoverOption(selectedOption){
-        // run the function with the selected option
-        console.log(selectedOption)
-        switch(selectedOption){
-            case "conscientiousness":
-                conscientiousness()
-                break;
-            case "agreeableness":
-                agreeableness()
+    // function hoverOption(selectedOption){
+    //     // run the function with the selected option
+    //     console.log(selectedOption)
+    //     switch(selectedOption){
+    //         case "conscientiousness":
+    //             conscientiousness()
+    //             break;
+    //         case "agreeableness":
+    //             agreeableness()
                 
-                break;
-            case "extraversion":
-                extraversion()
+    //             break;
+    //         case "extraversion":
+    //             extraversion()
                 
-                break;
-            case "nueroticism":
+    //             break;
+    //         case "nueroticism":
                 
-                nueroticism()
-                break;
-            default:
-                openess()
-        }
-    }
+    //             nueroticism()
+    //             break;
+    //         default:
+    //             openess()
+    //     }
+    // }
 
     function openess(){
         dots.attr("cx", function (d) { return x(d.openess_to_experience)})

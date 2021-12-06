@@ -73,16 +73,16 @@ var sal_person_plot = function(data) {
     .append("circle")
         .attr("cx", function (d) { return x(d.conscientiousness) } )
         .attr("cy", function (d) { return y(d.Salary) } )
-        .style('stroke', 'black')
-        .style('stroke-width', 0)
         .attr("r", 5)
         .attr("class", function(d) { return d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
         .attr("fill", d => colorScale(d.Specialization ))
         .on('mouseover', function(d, i){
-            d3.select(this).style('stroke-width', 2)
+            d3.select(this).attr("stroke-width", "10")
+            d3.select(this).attr("fill", "#000000")
         })
         .on("mouseout", function(d, i) {
-            d3.select(this).style('stroke-width', 0)
+            d3.select(this).attr("stroke-width", "0")
+            .attr("fill", d => colorScale(d.Specialization ))
         }) 
         dots.append("svg:title")
         .text(function(d) { return ("Conscientiousness Score: " + d.conscientiousness +"\nAgreeableness Score: " + d.agreeableness +"\nExtraversion Score: " + d.extraversion +

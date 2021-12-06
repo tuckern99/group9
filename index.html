@@ -18,12 +18,10 @@
 <body>
 
     
-    
-    <!-- <script src="./scripts/lindsey.js" defer></script> -->
+    <script src="./scripts/legend.js" defer></script>
     <script src="./scripts/carsten.js" defer></script>
     <script src="./scripts/boxplot.js" defer></script>
     <script src="./scripts/heatmap.js" defer></script>
-    <script src="./scripts/legend.js" defer></script>
     <script src="./scripts/script.js" defer></script>
     
 
@@ -50,23 +48,50 @@
                 <br>
                 <svg id="legend" width=200 height=210></svg>
                 <br>
-                <span>specialization</span>
-                <select id="special_sel" width=400></select>
+
+                <div class="container" id="options_div">
+                    <div class="row">
+                        <div class="col">
+                            <span>specialization</span>
+                        </div>
+                        <div class="col">
+                            <select id="special_sel" class="dropDown" width=400></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                            <span id="gender">gender</span>
+                        </div>
+                        <div class="col-auto">
+                            <select id="gender_sel" class="dropDown" width=400 ></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                            <span id="personality">personality</span>
+                        </div>
+                        <div class="col">
+                            <select id="trait_sel"  class="dropDown" width=400></select>
+                        </div>
+                    </div>
+
+                </div>
+                
+                
                 <br>
-                <span>gender</span>
-                <select id="gender_sel" width=400></select>
+                
+                
                 <br>
-                <span>personality</span>
-                <select id="trait_sel" width=400></select>
+                
+                
+
+
             </div>
             <div class="col-auto">
                 <svg id="heatmap" width=700 height=900>
                  
                 </svg>
             </div>
-            <!-- <div class="col-auto">
-                <svg id="legend" width=200 height=200></svg>
-            </div>      -->
             
             
         </div>
