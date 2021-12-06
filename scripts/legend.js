@@ -89,7 +89,7 @@ var legend = function (data) {
             
         var x = d3.scaleLinear()
             .domain([-8,4])
-            .range([ 0, 530 ]);
+            .range([ 0, 580 ]);
 
 
     // Add one dot in the legend for each name.
@@ -139,7 +139,7 @@ var legend = function (data) {
     
     var yScale = d3.scaleBand()
         .domain(items)
-        .range([810, 0])
+        .range([805, 0])
         .padding(0.1)
 
     // function hoverOption(selectedOption){
