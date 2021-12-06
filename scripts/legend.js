@@ -54,19 +54,32 @@ var legend = function (data) {
             .attr("height", size)
             .style("fill", function(d){ return color(d)})
             .on('mouseover', function(d, i){
+                spec = d3.select("#special_sel").property("value").replace(/\s/g, '')
+                gender = d3.select("#gender_sel").property("value")
+                i = i.replace(/\s/g, '')
+
                 d3.select(this).style('stroke-width', 2)
                 d3.select(this).style('stroke','black')
-                
-                i = i.replace(/\s/g, '')
-                console.log(i)
 
-                d3.selectAll(".f."+i).style('stroke-width', 1)
-                d3.selectAll(".f."+i).style('stroke', 'black')
-                d3.selectAll(".m."+i).style('stroke-width', 1)
-                d3.selectAll(".m."+i).style('stroke', 'black')
+                if (gender == 'all') {
+                    d3.selectAll(".f."+i).style('stroke-width', 1)
+                    d3.selectAll(".f."+i).style('stroke', 'black')
+                    d3.selectAll(".m."+i).style('stroke-width', 1)
+                    d3.selectAll(".m."+i).style('stroke', 'black')
+    
+                    d3.selectAll(".f."+i).style('opacity', 1)
+                    d3.selectAll(".m."+i).style('opacity', 1)
+                }
 
-                d3.selectAll(".f."+i).style('opacity', 1)
-                d3.selectAll(".m."+i).style('opacity', 1)
+                else {
+                    temp = gender == "female" ? ".f." : ".m."
+                    d3.selectAll(temp+i).style('stroke-width', 1)
+                    d3.selectAll(temp+i).style('stroke', 'black')
+    
+                    d3.selectAll(temp+i).style('opacity', 1)
+                }
+
+
             })
             .on("mouseout", function(d, i) {
                 spec = d3.select("#special_sel").property("value").replace(/\s/g, '')
