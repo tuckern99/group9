@@ -69,11 +69,11 @@ var heatmap = function (data) {
         .range(d3.schemeSet2);
 
     svg.append('text')
-        .attr('x', 10)
+        .attr('x', 60)
         .attr('y', 4)
         .attr('text-anchor', 'middle')
         .style('font-size', '14px')
-        .text('AMCAT Score');
+        .text('AMCAT Score in relation to Salary');
         
   // add the squares
     heatmapRect = svg.selectAll()
