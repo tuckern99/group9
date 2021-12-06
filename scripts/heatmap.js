@@ -56,10 +56,10 @@ var heatmap = function (data) {
         .select('.domain').remove()
 
   // build color scale
-    
-    var colorScale = d3.scaleSequential()
-    .interpolator(d3.interpolateInferno)
-    .domain([1,10])
+    var colorScale = d3.scaleOrdinal()
+    .domain(["m","f"])
+    .range(["#89CFF0","pink"]);
+
 
   // add the squares
     heatmapRect = svg.selectAll()
@@ -72,7 +72,7 @@ var heatmap = function (data) {
             .attr('ry', 4)
             .attr('width', xScale.bandwidth())
             .attr('height', yScale.bandwidth())
-            .style('fill', d => colorScale(d.Specialization))
+            .style('fill', d => colorScale(d.Gender))
             .style('stroke', 'black')
             .style('stroke-width', 4)
             .attr("class", function(d) { return "heatmap " + d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
