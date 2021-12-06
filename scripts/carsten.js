@@ -76,6 +76,7 @@ var sal_person_plot = function(data) {
         .attr("r", 5)
         .attr("class", function(d) { return d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
         .attr("fill", d => colorScale(d.Specialization ))
+        .style('fill-opacity', 0.75)
         .on('mouseover', function(d, i){
             d3.select(this)
             .attr("stroke", "black")
