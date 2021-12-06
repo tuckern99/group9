@@ -10,20 +10,6 @@ var legend = function (data) {
     .append("svg")
     .append("g")
 
-    //////////
-    // HIGHLIGHT GROUP //
-    //////////
-
-    // What to do when one group is hovered
-    // function highlight(d){
-    //     .on('mouseover', function(d, i){
-    //         d3.select(this).style('stroke-width', 2)
-    //     })
-    //     .on("mouseout", function(d, i) {
-    //         d3.select(this).style('stroke-width', 0)
-    //     }) 
-    // }
-
     // And when it is not hovered anymore
     var noHighlight = function(d){
         d3.selectAll(".myArea").style("opacity", 1)
