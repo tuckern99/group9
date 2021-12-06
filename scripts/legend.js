@@ -266,6 +266,7 @@ var legend = function (data) {
                 case "male":
                     d3.selectAll(".m").style("opacity", 1)
                     .attr("fill", d => colorScale(d.Specialization ))
+                    
                     break;
                 case "female":
                     d3.selectAll(".f").style("opacity", 1)
@@ -281,15 +282,18 @@ var legend = function (data) {
             switch(gender){
                 case "male":
                     d3.selectAll(".m."+spec).style("opacity", 1)
+                    .attr("fill", "#89CFF0")
                     break;
                 case "female":
                     d3.selectAll(".f."+spec).style("opacity", 1)
+                    .attr("fill", "pink")
                     break;
                 default:
                     d3.selectAll(".f."+spec).style("opacity", 1)
                     .attr("fill", "pink")
                     d3.selectAll(".m."+spec).style("opacity", 1)
                     .attr("fill", "#89CFF0")
+                    
             }
         }
     }

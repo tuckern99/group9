@@ -45,6 +45,10 @@ var heatmap = function (data) {
         .attr("transform", "rotate(-65)");
 
 
+    var yAccessor = d => d.Specialization
+
+    var specials =  [... new Set(dataset.map(yAccessor))]
+
   // Build y scale and axis:
     var yScale = d3.scaleBand()
         .domain(items)
@@ -56,9 +60,13 @@ var heatmap = function (data) {
         .select('.domain').remove()
 
   // build color scale
+    var genderColor = d3.scaleOrdinal()
+        .domain(["m","f"])
+        .range(["#89CFF0","pink"]);
+
     var colorScale = d3.scaleOrdinal()
-    .domain(["m","f"])
-    .range(["#89CFF0","pink"]);
+        .domain(specials)
+        .range(d3.schemeSet2);
 
 
   // add the squares
@@ -72,15 +80,15 @@ var heatmap = function (data) {
             .attr('ry', 4)
             .attr('width', xScale.bandwidth())
             .attr('height', yScale.bandwidth())
-            .style('fill', d => colorScale(d.Gender))
+            .style('fill', d => colorScale(d.Specialization))
             .style('stroke', 'black')
             .style('stroke-width', 4)
-            .attr("class", function(d) { return "heatmap " + d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
+            .attr("class", function(d) { return  d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " "+ "heatmap "  + d.ID })
             .style('stroke-opacity', 0)
             .style('fill-opacity', 0.05)
             .on('mouseover', darken_square)
             .on('mouseleave', function(d) {
-                lighten_square(d, this) // need to explicitly pass this
+                lighten_square(d, this)
             })
             heatmapRect.append("svg:title").text(function(d) { return ("Conscientiousness Score: " + rounding(d.conscientiousness) +"\nAgreeableness Score: " + rounding(d.agreeableness) +"\nExtraversion Score: " + rounding(d.extraversion) +
                                     "\nNueroticism Score: " +  rounding(d.nueroticism) + "\nOpeness to Experience Score: " + rounding(d.openess_to_experience)) })
