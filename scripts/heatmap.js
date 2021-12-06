@@ -77,7 +77,7 @@ var heatmap = function (data) {
             .style('stroke-width', 4)
             .attr("class", function(d) { return "heatmap " + d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
             .style('stroke-opacity', 0)
-            .style('fill-opacity', 0.02)
+            .style('fill-opacity', 0.05)
             .on('mouseover', darken_square)
             .on('mouseleave', function(d) {
                 lighten_square(d, this) // need to explicitly pass this
