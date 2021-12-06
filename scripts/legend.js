@@ -142,30 +142,6 @@ var legend = function (data) {
         .range([810, 0])
         .padding(0.1)
 
-    // function hoverOption(selectedOption){
-    //     // run the function with the selected option
-    //     console.log(selectedOption)
-    //     switch(selectedOption){
-    //         case "conscientiousness":
-    //             conscientiousness()
-    //             break;
-    //         case "agreeableness":
-    //             agreeableness()
-                
-    //             break;
-    //         case "extraversion":
-    //             extraversion()
-                
-    //             break;
-    //         case "nueroticism":
-                
-    //             nueroticism()
-    //             break;
-    //         default:
-    //             openess()
-    //     }
-    // }
-
     function openess(){
         dots.attr("cx", function (d) { return x(d.openess_to_experience)})
         heatmapRect.attr('y', function (d) { return yScale(rounding(d.openess_to_experience))})

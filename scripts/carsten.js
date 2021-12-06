@@ -42,11 +42,11 @@ var sal_person_plot = function(data) {
         .call(d3.axisLeft(y));
 
     titleT = svg.append('text')
-    .attr('x', 100 )
+    .attr('x', 160 )
     .attr('y', -20)
     .attr('text-anchor', 'middle')
     .style('font-size', 20)
-    .text('Salary and AMCAT Scores')
+    .text('Salary and AMCAT Personality Scores')
     
     // X label
     svg.append('text')
@@ -77,12 +77,15 @@ var sal_person_plot = function(data) {
         .attr("class", function(d) { return d.Gender + " "+ d.Specialization.replace(/\s/g, '') + " " + d.ID })
         .attr("fill", d => colorScale(d.Specialization ))
         .on('mouseover', function(d, i){
-            d3.select(this).attr("stroke-width", "10")
-            d3.select(this).attr("fill", "#000000")
+            d3.select(this)
+            .attr("stroke", "black")
+            .attr("stroke-width", "2")
         })
         .on("mouseout", function(d, i) {
-            d3.select(this).attr("stroke-width", "0")
-            .attr("fill", d => colorScale(d.Specialization ))
+
+            d3.select(this)
+                .attr("stroke-width", "0")
+            
         }) 
         dots.append("svg:title")
         .text(function(d) { return ("Conscientiousness Score: " + d.conscientiousness +"\nAgreeableness Score: " + d.agreeableness +"\nExtraversion Score: " + d.extraversion +
