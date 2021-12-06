@@ -23,3 +23,24 @@ h1 {
     background-color: rgb(255, 255, 255);
     margin-top: 10px;
 }
+
+.dropDown {
+    float: left;
+    width: 340px;
+}
+
+span {
+    float: left;
+}
+
+#gender {
+    margin-right: 45px;
+}
+
+#personality {
+    margin-right: 17px;
+}
+
+#options_div {
+    margin-top: 10px;
+}
