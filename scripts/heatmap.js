@@ -1,8 +1,8 @@
 var heatmap = function (data) {
 
-    var margins = {top: 10, right: 0, bottom: 240, left: 50},
+    var margins = {top: 15, right: 0, bottom: 240, left: 50},
         width = 600 - margins.left - margins.right,
-        height = 1200 - margins.top - margins.bottom;
+        height = 1300 - margins.top - margins.bottom;
 
     var svg = d3
     .select('#heatmap')
@@ -69,11 +69,10 @@ var heatmap = function (data) {
         .range(d3.schemeSet2);
 
     svg.append('text')
-        .attr('x', -55)
-        .attr('y', -35)
+        .attr('x', 10)
+        .attr('y', 4)
         .attr('text-anchor', 'middle')
-        .attr('transform', 'rotate(-90)')
-        .style('font-size', 14)
+        .style('font-size', '14px')
         .text('AMCAT Score');
         
   // add the squares

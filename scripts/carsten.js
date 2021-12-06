@@ -46,7 +46,7 @@ var sal_person_plot = function(data) {
     .attr('y', -20)
     .attr('text-anchor', 'middle')
     .style('font-size', 20)
-    .text('Salary and Amcat Scores')
+    .text('Salary and AMCAT Scores')
     
     // X label
     svg.append('text')
